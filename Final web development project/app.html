@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Riddle Generator</title>
+  <link rel="stylesheet" href="app-style.css">
+</head>
+<body>
+  <div class="app-container">
+    <h1>Riddle Generator</h1>
+
+    <button class="btn" onclick="generateRiddle()">Give me a riddle</button>
+    <button class="btn" onclick="showHint()">Get Hint</button>
+    <button class="btn" onclick="showAnswer()">Show Answer</button>
+
+    <p id="riddle"></p>
+    <p id="hint"></p>
+    <p id="answer"></p>
+
+    <a class="back-link" href="scratch.html">Back to Scratch Page</a>
+  </div>
+
+  <script>
+    const riddles = [
+      {
+        question: "What has to be broken before you can use it?",
+        answer: "An egg"
+      },
+      {
+        question: "I'm tall when I'm young, and short when I'm old. What am I?",
+        answer: "A candle"
+      },
+      {
+        question: "What can you catch but not throw?",
+        answer: "A cold"
+      }
+    ];
+
+    let currentRiddle = null;
+
+    function generateRiddle() {
+      const random = Math.floor(Math.random() * riddles.length);
+      currentRiddle = riddles[random];
+      document.getElementById("riddle").textContent = currentRiddle.question;
+      document.getElementById("hint").textContent = "";
+      document.getElementById("answer").textContent = "";
+    }
+
+    function showHint() {
+  if (currentRiddle) {
+    const words = currentRiddle.answer.trim().split(" ");
+    if (words.length >= 2) {
+      const secondWordFirstLetter = words[1].charAt(0);
+      document.getElementById("hint").textContent = "Hint: The word starts with '" + secondWordFirstLetter + "'";
+    } else {
+      document.getElementById("hint").textContent = "Hint: Only one word in the answer.";
+    }
+  }
+}
+
+    function showAnswer() {
+      if (currentRiddle) {
+        document.getElementById("answer").textContent = "Answer: " + currentRiddle.answer;
+      }
+    }
+  </script>
+</body>
+</html>
